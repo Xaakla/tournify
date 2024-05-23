@@ -1,7 +1,7 @@
 package com.app.tournify.enums;
 
 public enum TournamentType {
-    STANDINGS,
+    LEAGUE_STAGE,
     GROUP_STAGE,
     KNOCKOUT_STAGE
 }
