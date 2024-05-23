@@ -17,4 +17,7 @@ public class Team {
 
     @NotBlank
     private String acronym;
+
+    @NotBlank
+    private String imageId;
 }
