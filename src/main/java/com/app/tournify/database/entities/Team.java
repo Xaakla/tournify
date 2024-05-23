@@ -1,4 +1,4 @@
-package com.app.tournify.database;
+package com.app.tournify.database.entities;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
