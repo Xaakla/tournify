@@ -24,5 +24,6 @@ public class Match {
     @NotNull
     private int away_score;
 
+    @NotNull
     private MatchStatus status;
 }

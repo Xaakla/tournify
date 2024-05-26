@@ -1,17 +1,8 @@
-package com.app.tournify.database.entities;
+package com.app.tournify.dtos;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotBlank;
 
-@Entity
-public class Team {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
+public class TeamDto {
     @NotBlank
     private String name;
 
@@ -24,22 +15,7 @@ public class Team {
     @NotBlank
     private String color;
 
-    public Team() {
-    }
-
-    public Team(String name, String acronym, String imageId, String color) {
-        this.name = name;
-        this.acronym = acronym;
-        this.imageId = imageId;
-        this.color = color;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
+    public TeamDto() {
     }
 
     public String getName() {

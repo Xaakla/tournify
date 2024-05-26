@@ -17,6 +17,11 @@ public class BaseTournament {
     private TournamentType type;
 
     @NotNull
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Team> teams;
+    private int winPoints;
+
+    @NotNull
+    private int drawPoints;
+
+    @NotNull
+    private int lossPoints;
 }
