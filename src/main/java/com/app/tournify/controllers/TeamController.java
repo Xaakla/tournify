@@ -31,6 +31,6 @@ public class TeamController {
 
     @PostMapping()
     public ResponseEntity<Team> createTeam(@RequestBody TeamDto team) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(this.teamService.saveTeam(team));
+        return ResponseEntity.status(HttpStatus.CREATED).body(teamService.saveTeam(team));
     }
 }

@@ -1,16 +1,11 @@
-package com.app.tournify.database.entities;
+package com.app.tournify.dtos;
 
 import com.app.tournify.enums.LegType;
 import com.app.tournify.enums.TournamentType;
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.MappedSuperclass;
-import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import java.util.List;
 
-@MappedSuperclass
-public class BaseTournament {
+public class BaseTournamentDto {
     @NotBlank
     private String name;
 
@@ -29,17 +24,16 @@ public class BaseTournament {
     @NotNull
     private int lossPoints;
 
-    public BaseTournament(String name, TournamentType type, LegType legType, int winPoints, int drawPoints, int lossPoints) {
+    public BaseTournamentDto() {
+    }
+
+    public BaseTournamentDto(String name, TournamentType type, LegType legType, int winPoints, int drawPoints, int lossPoints) {
         this.name = name;
         this.type = type;
         this.legType = legType;
         this.winPoints = winPoints;
         this.drawPoints = drawPoints;
         this.lossPoints = lossPoints;
-    }
-
-    public BaseTournament() {
-
     }
 
     public String getName() {

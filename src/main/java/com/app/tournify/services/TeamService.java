@@ -29,6 +29,11 @@ public class TeamService {
     }
 
     @Transactional
+    public List<Team> findAllTeamsByIds(List<Long> ids) {
+        return teamRepository.findByIdIn(ids);
+    }
+
+    @Transactional
     public Team saveTeam(TeamDto team) {
         return teamRepository.save(new Team(team.getName(), team.getAcronym(), team.getImageId(), team.getColor()));
     }
