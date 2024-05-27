@@ -34,6 +34,13 @@ public class Team {
         this.color = color;
     }
 
+    public Team(String name) {
+        this.name = name;
+        this.acronym = name;
+        this.imageId = name;
+        this.color = "#fff";
+    }
+
     public Long getId() {
         return id;
     }

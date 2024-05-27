@@ -71,6 +71,7 @@ public class LeagueStageService {
     private List<Round> buildRounds(List<TeamTable> teams, LegType legType) {
         // Obtém o número de equipes
         int numberOfTeams = teams.size();
+        int numberOfTeamsModule = numberOfTeams % 2 == 0 ? (numberOfTeams - 1) : numberOfTeams;
         // Lista para armazenar as rodadas de partidas
         var rounds = new ArrayList<Round>();
 
@@ -79,16 +80,23 @@ public class LeagueStageService {
         int[] awayStreak = new int[numberOfTeams];
 
         // Gerar rodadas de ida
-        for (int roundIndex = 0; roundIndex < numberOfTeams - 1; roundIndex++) {
+        for (int roundIndex = 0; roundIndex < numberOfTeamsModule; roundIndex++) {
             // Lista para armazenar as partidas da rodada atual
             List<Match> matches = new ArrayList<>();
             for (int i = 0; i < numberOfTeams / 2; i++) {
                 // Calcula os índices das equipes que jogarão em casa e fora
-                int homeIndex = (roundIndex + i) % (numberOfTeams - 1);
-                int awayIndex = (numberOfTeams - 1 - i + roundIndex) % (numberOfTeams - 1);
-                // Se for a primeira iteração, ajusta o índice da equipe que jogará fora
-                if (i == 0) {
-                    awayIndex = numberOfTeams - 1;
+                int homeIndex = (roundIndex + i) % numberOfTeamsModule;
+                int awayIndex = (numberOfTeams - 1 - i + roundIndex) % numberOfTeamsModule;
+
+                // Se o numero de times for par
+                if (numberOfTeams % 2 == 0) {
+                    // Se for a primeira iteração, ajusta o índice da equipe que jogará fora
+                    if (i == 0) {
+                        awayIndex = numberOfTeams - 1;
+                    }
+                } else { // Se o numero de times for impar
+                    // Se for a mesma equipe, pula esta iteração
+                    if (homeIndex == awayIndex) continue;
                 }
 
                 // Verifica e ajusta, se necessário, para evitar mais de 2 jogos consecutivos em casa ou fora

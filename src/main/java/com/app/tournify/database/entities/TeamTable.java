@@ -10,7 +10,7 @@ public class TeamTable {
     private Long id;
 
     @NotNull
-    @OneToOne(fetch = FetchType.EAGER)
+    @ManyToOne(cascade = CascadeType.ALL)
     private Team team;
 
     @NotNull
