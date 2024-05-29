@@ -6,6 +6,7 @@ import com.app.tournify.services.TeamService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -32,5 +33,10 @@ public class TeamController {
     @PostMapping()
     public ResponseEntity<Team> createTeam(@RequestBody TeamDto team) {
         return ResponseEntity.status(HttpStatus.CREATED).body(teamService.saveTeam(team));
+    }
+
+    @PostMapping("/{id}/image")
+    public ResponseEntity<String> uploadImage (@PathVariable ("id") Long id, @RequestParam("image") MultipartFile image) {
+        return teamService.setTeamImage(id, image);
     }
 }
