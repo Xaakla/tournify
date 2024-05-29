@@ -23,6 +23,8 @@ public class UploadImageService {
             String fileName = image.getOriginalFilename();
 
             try {
+
+                // create directory if it doesn't exist
                 File directory = new File(uploadPath);
 
                 if (!directory.exists()) {
