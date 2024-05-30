@@ -38,4 +38,10 @@ public class TeamService {
         return teamRepository.save(new Team(team.getName(), team.getAcronym(), team.getImageId(), team.getColor()));
     }
 
+    @Transactional
+    public List<Team> saveAllTeams(List<TeamDto> teams) {
+        var teamsToSave = teams.stream().map(team -> new Team(team.getName(), team.getAcronym(), team.getImageId(), team.getColor())).toList();
+        return teamRepository.saveAll(teamsToSave);
+    }
+
 }

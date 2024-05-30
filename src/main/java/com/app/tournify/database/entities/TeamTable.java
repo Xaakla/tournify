@@ -34,6 +34,9 @@ public class TeamTable {
     @NotNull
     private int losses;
 
+    @NotNull
+    private int matchesPlayed;
+
     public TeamTable() {
     }
 
@@ -46,6 +49,19 @@ public class TeamTable {
         this.wins = 0;
         this.draws = 0;
         this.losses = 0;
+        this.matchesPlayed = 0;
+    }
+
+    public TeamTable(String bye) {
+        this.team = new Team(bye);
+        this.points = 0;
+        this.goalsScored = 0;
+        this.goalsConceded = 0;
+        this.goalDifference = 0;
+        this.wins = 0;
+        this.draws = 0;
+        this.losses = 0;
+        this.matchesPlayed = 0;
     }
 
     public Long getId() {
@@ -118,5 +134,13 @@ public class TeamTable {
 
     public void setLosses(int losses) {
         this.losses = losses;
+    }
+
+    public int getMatchesPlayed() {
+        return matchesPlayed;
+    }
+
+    public void setMatchesPlayed(int matchesPlayed) {
+        this.matchesPlayed = matchesPlayed;
     }
 }

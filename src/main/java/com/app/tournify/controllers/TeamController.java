@@ -33,4 +33,9 @@ public class TeamController {
     public ResponseEntity<Team> createTeam(@RequestBody TeamDto team) {
         return ResponseEntity.status(HttpStatus.CREATED).body(teamService.saveTeam(team));
     }
+
+    @PostMapping("/all")
+    public ResponseEntity<List<Team>> createTeams(@RequestBody List<TeamDto> teams) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(teamService.saveAllTeams(teams));
+    }
 }
