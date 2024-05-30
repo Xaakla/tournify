@@ -3,20 +3,23 @@ package com.app.tournify.services;
 import com.app.tournify.database.entities.Team;
 import com.app.tournify.database.repositories.TeamRepository;
 import com.app.tournify.dtos.TeamDto;
+import com.app.tournify.utils.Utils;
 import jakarta.transaction.Transactional;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class TeamService {
 
     private final TeamRepository teamRepository;
-    private final UploadImageService uploadImageService;
+    private final ImageService uploadImageService;
 
-    public TeamService(TeamRepository teamRepository, UploadImageService uploadImageService) {
+    public TeamService(TeamRepository teamRepository, ImageService uploadImageService) {
         this.teamRepository = teamRepository;
         this.uploadImageService = uploadImageService;
     }
@@ -49,14 +52,20 @@ public class TeamService {
     }
 
     public ResponseEntity<String> setTeamImage(Long id, MultipartFile image) {
-        String imageUrl = uploadImageService.uploadImage(image);
+        if (!Objects.requireNonNull(image.getContentType()).startsWith("image/")) {
+            throw new RuntimeException("Invalid image type");
+        }
+
+        var team = teamRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Team not found"));
+
+        new File(team.getImageId()).delete();
+
+        String imageUrl = uploadImageService.uploadImage(image, String.format("team-%s.%s", id, Utils.getExtension(Objects.requireNonNull(image.getOriginalFilename()))));
 
         if (image.isEmpty()) {
             throw new RuntimeException("Image file is required");
         }
-
-        var team = teamRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Project not found"));
 
         team.setImageId(imageUrl);
         teamRepository.save(team);

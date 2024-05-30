@@ -1,5 +1,7 @@
 package com.app.tournify.services;
 
+import com.app.tournify.database.repositories.TeamRepository;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -8,19 +10,19 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.util.Objects;
 
 @Service
-public class UploadImageService {
+public class ImageService {
 
     @Value("${upload.path}")
     private String uploadPath;
 
-    public String uploadImage(MultipartFile image) {
-
+    public String uploadImage(MultipartFile image, String filename) {
         String filePath = null;
 
         if (!image.isEmpty()) {
-            String fileName = image.getOriginalFilename();
 
             try {
 
@@ -31,7 +33,7 @@ public class UploadImageService {
                     directory.mkdirs();
                 }
 
-                File serverFile = new File(directory.getAbsolutePath() + File.separator + fileName);
+                File serverFile = new File(directory.getAbsolutePath() + File.separator + filename);
 
                 BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(serverFile));
 
