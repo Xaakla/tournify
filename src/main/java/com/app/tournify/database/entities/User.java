@@ -17,9 +17,9 @@ public class User {
 
     private String password;
 
-    public User(UserDto userDto) {
+    public User(UserDto userDto, String encryptedPassword) {
         this.email = userDto.email();
-        this.password = userDto.password();
+        this.password = encryptedPassword;
         this.username = userDto.username();
     }
 

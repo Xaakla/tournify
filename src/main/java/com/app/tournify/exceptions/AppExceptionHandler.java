@@ -1,6 +1,7 @@
 package com.app.tournify.exceptions;
 
 import com.app.tournify.exceptions.errors.BadRequestException;
+import com.app.tournify.exceptions.errors.ConflictException;
 import com.app.tournify.exceptions.errors.NotFoundException;
 import com.app.tournify.exceptions.errors.UnauthorizedException;
 import org.springframework.http.HttpStatus;
@@ -43,5 +44,10 @@ public class AppExceptionHandler {
     @ExceptionHandler(UnauthorizedException.class)
     public ResponseEntity<Object> handleUnauthorizedException(UnauthorizedException ex) {
         return new ResponseEntity<>(ex.getMessage(), HttpStatus.UNAUTHORIZED);
+    }
+
+    @ExceptionHandler(ConflictException.class)
+    public ResponseEntity<Object> handleBadRequestException(ConflictException exception) {
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(exception.getMessage());
     }
 }

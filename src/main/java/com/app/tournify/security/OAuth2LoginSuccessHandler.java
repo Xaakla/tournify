@@ -32,8 +32,8 @@ public class OAuth2LoginSuccessHandler implements AuthenticationSuccessHandler {
         String googleName = oAuth2User.getAttribute("name");
         String googleEmail = oAuth2User.getAttribute("email");
 
-        UserDto userDto = new UserDto(googleName, googleEmail, "");
-        User userToCheck = new User(userDto);
+        UserDto userDto = new UserDto(googleName, googleEmail, "", "");
+        User userToCheck = new User(userDto, "");
 
         DbUserDetails registeredUser = null;
 
